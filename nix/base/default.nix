@@ -90,16 +90,15 @@
   users.defaultUserShell = pkgs.zsh;
   programs.zsh = {
     enable = true;
-    oh-my-zsh = {
+    ohMyZsh = {
       enable = true;
       theme = "refined";
       plugins = [
-        "git" "zsh-256color" "zsh-completions" "zsh-autosuggestions" "zsh-syntax-highlighting"
-        "docker" "colored-man-pages"
+        "git" "docker" "colored-man-pages"
       ];
     };
       
-    enableAutosuggestions = true;
+    autosuggestions.enable = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
   };
