@@ -1,0 +1,136 @@
+(defpoll date :interval "1m"
+  ; json string which eww can parse automatically (` = ' = ")
+  :initial '{"date":"01.01.2000","day":"Monday"}'
+  `LC_TIME=en_US.UTF-8 date '+{"date":"%d.%m.%y","day":"%A"}'`) 
+
+(defpoll ram :interval "1s"
+  ; in MB and percent
+  :initial '{"total":0,"used":0,"used_percent":0}'
+  "~/.config/eww/scripts/ram-usage.sh") 
+
+(defpoll logarithmic-cpu :interval "1s"
+  ; in percent
+  :initial 0
+  "~/.config/eww/scripts/logarithmic-cpu.sh") 
+
+(deflisten workspaces-1
+  ; json array with data for hyprland workspaces 1 to 9
+  :initial '[{"id":"1","occupied":false}]'
+  "~/.config/eww/scripts/workspaces/get-all.sh 1")
+
+(deflisten workspaces-2
+  ; json array with data for hyprland workspaces 11 to 19
+  :initial '[{"id":"11","occupied":false}]'
+  "~/.config/eww/scripts/workspaces/get-all.sh 2")
+
+(deflisten current-workspace
+  ; json array with current hyprland workspace per monitor
+  :initial '[1, 11]'
+  "~/.config/eww/scripts/workspaces/get-active.sh")
+
+(defwindow desktop-0 :monitor 0
+  :stacking "bottom" ; below other sutff / on desktop
+  :exclusive false ; dont reserve WM space
+  :focusable false ; does not need keyboard input
+  :geometry (geometry
+              :anchor "center"
+              ; small window, stretches to fit content
+              :width  "1%"
+              :height "1%")
+  (desktop :workspace-data workspaces-1)) ; hyprsome workspaces 1-9
+
+; same window for other monitor, because spawning on other
+; monitor with `eww open desktop-0 --screen 1` doesn't work...?
+(defwindow desktop-1 :monitor 1
+  :stacking "bottom"
+  :exclusive false
+  :focusable false
+  :geometry (geometry
+              :anchor "center"
+              :width  "1%"
+              :height "1%")
+  (desktop :workspace-data workspaces-2)) ; hyprsome workspaces 11-19
+
+; workspace-data: json array with data about workspaces to display
+(defwidget desktop [workspace-data] 
+  (box
+    :class "main-box"
+    :orientation "v"
+    :space-evenly false
+    :spacing -10
+    (box
+      :space-evenly false
+      :spacing 15
+      (box
+        :space-evenly false
+        :spacing 25
+        (circular-progress-fancy
+          :tooltip "${round(EWW_CPU.avg, 2)}%"
+          :value logarithmic-cpu
+          :text "" :style "padding-right: 0.35em" ; cpu nerdfont character
+          :condition       {EWW_CPU.avg < 10}
+          :condition-text "${round(EWW_CPU.avg, 1)}")
+        (circular-progress-fancy
+          :tooltip "${ram.used} / ${ram.total} MB"
+          :value {ram.used_percent}
+          :text "" :style "padding-right: 0.3em" ; memory chip nerdfont character
+          :condition      {ram.used < 1000}
+          :condition-text {ram.used}))
+      (label
+        :class "time"
+        :text {formattime(EWW_TIME, "%R")}
+        :tooltip {formattime(EWW_TIME, "%T")})
+      (box
+        :orientation "v"
+        :spacing -50
+        (overlay
+          ; overlay with transparent longest possible value
+          ; => visible box size always stays the same
+          ; => no centering problems
+          (label :text "Wednesday" :style "color: transparent")
+          (label :text {date.day}))
+        (label :text {date.date})))
+    (workspaces :data workspace-data)))
+
+; data: json array with data about workspaces to display
+(defwidget workspaces [data]
+  (eventbox
+    :onscroll "~/.config/eww/scripts/workspaces/change-active.sh {} ${current-workspace[0]}"
+    (box
+      :halign "center"
+      :style "margin-left: -1px" ; better centering below ":" of time
+      :space-evenly false
+      :spacing 38
+      (for workspace in data
+        (eventbox
+          :onclick "hyprctl dispatch workspace ${workspace.id}"
+          :tooltip {workspace.id > 10 ? workspace.id - 10 : workspace.id}
+          :class "workspace"
+          (label
+            :style "padding-right: 0.25em"
+            :text {
+              workspace.id == current-workspace[0] || workspace.id == current-workspace[1] ? "󰟒" : ; nerdfont character
+                workspace.occupied ? "󰝥" : "" })))))) ; nerdfont characters
+
+(defwidget circular-progress-fancy [tooltip value text style condition condition-text]
+  (overlay
+    :tooltip tooltip
+    (circular-progress
+      :class "inner-circle"
+      :value 100
+      :thickness 25)
+    (circular-progress
+      :class "outer-circle"
+      :value value
+      :start-at 75
+      :thickness 3)
+    (revealer
+      :reveal {!condition}
+      (label
+        :text text
+        :style style))
+    (revealer
+      :reveal {condition}
+      (label
+        :text condition-text
+        :class "circle-condition-text"))))

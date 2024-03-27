@@ -1,0 +1,47 @@
+:root {
+    --my-bg:      #29282a;
+    --my-bg-dark: #1F1E20;
+    --arrowpanel-background: var(--my-bg) !important;
+    --toolbar-bgcolor: var(--my-bg) !important;
+    --urlbar-box-bgcolor: transparent !important;
+    --urlbar-box-focus-bgcolor: transparent !important;
+}
+
+:root[sizemode="normal"] body {
+    border-bottom-left-radius:  10px !important;
+    border-bottom-right-radius: 10px !important;
+}
+
+#nav-bar {
+    box-shadow: none !important;
+}
+
+#navigator-toolbox {
+    background-color: var(--my-bg-dark) !important;
+}
+
+#urlbar[open] > #urlbar-background,
+.menupopup-arrowscrollbox
+{
+    background-color: var(--my-bg) !important;
+}
+
+#urlbar-background {
+    background-color: transparent !important;
+    outline: none !important;
+}
+
+#navigator-toolbox,
+#urlbar-background,
+#tabbrowser-tabs
+{
+    border: none !important;
+}
+
+hbox.titlebar-spacer,
+hbox.titlebar-buttonbox-container,
+#alltabs-button,
+#identity-icon-label
+{
+    display: none !important;
+}
