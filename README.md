@@ -1,5 +1,9 @@
 # [NixOS](https://nixos.org/) configuration and other dotfiles
 
+**This config is based on [julius-boettger's](https://github.com/julius-boettger/dotfiles).** Full credit to him. I have only slightly changed some config settings for my personal setup. Everything past this line was beautifly written and create by him.
+
+_All installation procedures and config references should still work as listed below._
+
 ### Credit
 - My [Awesome](https://awesomewm.org/) config is based on the "rainbow" theme of [awesome-copycats](https://github.com/lcpz/awesome-copycats)
 - My [Rofi](https://github.com/lbonn/rofi) themes are based on the "rounded" theme of [rofi-themes-collection](https://github.com/newmanls/rofi-themes-collection)
