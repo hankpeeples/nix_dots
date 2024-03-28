@@ -60,6 +60,7 @@
     fastfetch # neofetch but fast
     git-credential-manager
     gh
+    lazygit
     librespeed-cli # speedtest
     meson ninja # for building c/c++ projects
     pkg-config # for c/c++/rust dependency management

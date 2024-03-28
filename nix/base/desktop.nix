@@ -338,6 +338,7 @@
   };
   # files somewhere else in ~/
   home.file = {
+    ".zshrc".source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/other/.zshrc";
     ".ideavimrc".source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/other/.ideavimrc";
     ".local/share/rofi/themes".source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/rofi";
     ".mozilla/firefox/${host.firefoxProfile}/chrome/userChrome.css".source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/other/firefox.css";
