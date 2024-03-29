@@ -15,7 +15,7 @@ add_newline = true
 # prompt character below
 format = """
 $username$hostname : $all\
-$os 
+$os
 """
 
 # Replace the "❯"

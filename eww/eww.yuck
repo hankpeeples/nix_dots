@@ -78,7 +78,7 @@
           :condition-text {ram.used}))
       (label
         :class "time"
-        :text {formattime(EWW_TIME, "%R")}
+        :text {formattime(EWW_TIME, "%I:%M")}
         :tooltip {formattime(EWW_TIME, "%T")})
       (box
         :orientation "v"

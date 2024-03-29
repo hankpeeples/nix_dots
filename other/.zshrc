@@ -69,3 +69,4 @@ alias tree="tree -C -a -I '.git|.github|.yarn|.DS_Store|node_modules'"
 
 eval "$(starship init zsh)"
 
+eval "$(zellij setup --generate-auto-start zsh)"

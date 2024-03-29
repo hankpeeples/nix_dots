@@ -168,6 +168,8 @@
     # lockscreen
     variables.pkgs.swaylock-effects
     unstable.swaylock-effects
+
+    waybar
   ];
 
   ###########################################
@@ -329,6 +331,9 @@
     "nvim"                    = { source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/nvim";    recursive = true; };
     "eww"                     = { source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/eww";     recursive = true; };
     "awesome"                 = { source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/awesome"; recursive = true; };
+    "waybar"                  = { source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/waybar";  recursive = true; };
+    "zellij"                  = { source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/zellij";  recursive = true; };
+    "kitty"                   = { source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/kitty";   recursive = true; };
     "swaync"                     .source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/swaync";
     "hypr/hyprland.conf"         .source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/hyprland/hyprland.conf";
     "fastfetch/config.jsonc"     .source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/fastfetch/default.jsonc";   

@@ -48,6 +48,8 @@
   # packages to install, mostly command line stuff
   environment.systemPackages = with pkgs; [
     git
+    zellij
+    wget
     vim
     bash
     jq # process json
@@ -65,7 +67,6 @@
     librespeed-cli # speedtest
     meson ninja # for building c/c++ projects
     pkg-config # for c/c++/rust dependency management
-    cbonsai # ascii art bonsai
     starship # shell prompt, install as program and package to set PATH
     # compilers, interpreters, debuggers
     gcc
