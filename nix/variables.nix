@@ -16,7 +16,7 @@
       # networking hostname
       hostName = "nixos-2";
       # firefox profile to customize
-      firefoxProfile = "h5hep79f.dev-edition-default";
+      firefoxProfile = "i49bez0r.default";
       # nix configuration to include
       modules = [
         ./base/desktop.nix

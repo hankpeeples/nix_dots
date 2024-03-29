@@ -61,6 +61,7 @@
     git-credential-manager
     gh
     lazygit
+    neovim
     librespeed-cli # speedtest
     meson ninja # for building c/c++ projects
     pkg-config # for c/c++/rust dependency management
@@ -69,11 +70,17 @@
     # compilers, interpreters, debuggers
     gcc
     rustup
+    go
     nodePackages_latest.nodejs
     (python3.withPackages (python-pkgs: with python-pkgs; [
       virtualenv
     ]))
   ];
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
 
   ###########################################
   ###########################################

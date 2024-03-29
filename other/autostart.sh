@@ -51,8 +51,8 @@ openrgb --profile default &
 python /etc/dotfiles/nix/update/update_on_saturday.py &
 
 # set nzxt kraken aio pump speed curve
-liquidctl --match kraken initialize
-liquidctl --match kraken set pump speed 30 55 45 100
+#liquidctl --match kraken initialize
+#liquidctl --match kraken set pump speed 30 55 45 100
 
 ### set up virtual microphone with noise reduction
 set_mic() {

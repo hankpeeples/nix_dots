@@ -326,6 +326,7 @@
   ### symlink dotfiles
   # files in ~/.config/
   xdg.configFile = {
+    "nvim"                    = { source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/nvim";    recursive = true; };
     "eww"                     = { source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/eww";     recursive = true; };
     "awesome"                 = { source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/awesome"; recursive = true; };
     "swaync"                     .source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/swaync";

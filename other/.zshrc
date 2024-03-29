@@ -34,9 +34,9 @@ COMPLETION_WAITING_DOTS="true"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-#plugins=(zsh-256color zsh-completions zsh-autosuggestions zsh-syntax-highlighting
-#  colored-man-pages docker git 
-#)
+plugins=(zsh-256color zsh-completions zsh-autosuggestions zsh-syntax-highlighting
+  colored-man-pages docker git 
+)
 
 #source $ZSH/oh-my-zsh.sh
 
@@ -53,6 +53,10 @@ alias starshipconf="chezmoi edit ~/.config/starship.toml" # Open starship config
 alias kittyconf="chezmoi edit ~/.config/kitty"
 alias hyprconf="chezmoi edit ~/.config/hypr" 
 alias wayconf="chezmoi edit ~/.config/waybar"
+
+alias cdn="cd /etc/dotfiles"
+alias fu="nix flake update /etc/dotfiles/nix"
+alias nixup="sudo nixos-rebuild switch --flake /etc/dotfiles/nix#desktop"
 
 alias l="eza --long --header --git --no-permissions --no-user --all --grid --icons"
 alias ll="eza --long --no-user --git --all --icons"

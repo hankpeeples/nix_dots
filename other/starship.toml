@@ -14,12 +14,13 @@ add_newline = true
 # standalone format to get os glyph on ps1 line,
 # prompt character below
 format = """
-$os $username$hostname : $all\
-$character
+$username$hostname : $all\
+$os 
 """
 
 # Replace the "❯"
 [character]
+disabled = true
 success_symbol = "[λ](green)"
 error_symbol = "[λ](red)"
 
