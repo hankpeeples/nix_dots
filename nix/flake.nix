@@ -9,6 +9,15 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     # for hyprland version 0.34.0
     nixpkgs-hyprland-34.url = "github:nixos/nixpkgs?ref=160b762eda6d139ac10ae081f8f78d640dd523eb";
+    # shared dependencies of following inputs
+    flake-utils.url = "github:numtide/flake-utils";
+    flake-compat = { url = "github:edolstra/flake-compat"; flake = false; };
+    # for more vscode extensions
+    nix-vscode-extensions = { url = "github:nix-community/nix-vscode-extensions";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.flake-compat.follows = "flake-compat";
+    };
   };
 
   # take inputs as arguments
@@ -31,6 +40,7 @@
     let
       # attributes of this set can be taken as function arguments in modules like base/default.nix
       specialArgs = {
+        vscode-extensions = (import inputs.nix-vscode-extensions).extensions.${system};
         # hyprland version 0.34.0
         hyprland-34-pkgs = import inputs.nixpkgs-hyprland-34 pkgs-config;
         # shared variables

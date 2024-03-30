@@ -48,7 +48,6 @@
   # packages to install, mostly command line stuff
   environment.systemPackages = with pkgs; [
     git
-    zellij
     wget
     vim
     bash
@@ -82,6 +81,16 @@
     enable = true;
     defaultEditor = true;
   };
+  
+  programs.nix-index.enableZshIntegration = true;
+  # zsh config
+  programs.zsh = {
+    enable = true;
+    enableGlobalCompInit = true;
+    autosuggestions.enable = true;
+    promptInit = ''# nothing'';
+    syntaxHighlighting.enable = true;
+  };
 
   ###########################################
   ###########################################
@@ -97,21 +106,6 @@
 
   ### fish shell
   users.defaultUserShell = pkgs.zsh;
-  programs.zsh = {
-    enable = true;
-    ohMyZsh = {
-      enable = true;
-      theme = "refined";
-      plugins = [
-        "git" "docker" "colored-man-pages"
-      ];
-    };
-      
-    autosuggestions.enable = true;
-    enableCompletion = true;
-    syntaxHighlighting.enable = true;
-  };
-  
 
   # config file location for starship prompt
   environment.sessionVariables.STARSHIP_CONFIG = "/etc/dotfiles/other/starship.toml";
@@ -143,7 +137,36 @@
       helper = ${pkgs.git-credential-manager}/bin/git-credential-manager
   '';
 
-  ### symlink dotfiles
-  # files in ~/.config/
-  #xdg.configFile."fish/config.fish".source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/other/init.fish";
+  # home manager zsh config
+  programs.zsh = {
+    enable = true;
+    oh-my-zsh = {
+      enable = true;
+      theme = "refined";
+      plugins = [
+        "git" "docker" "colored-man-pages"
+      ];
+    };
+
+    shellAliases = {
+      zshconf   = "$EDITOR /etc/dotfiles/other/.zshrc";
+      kittyconf = "$EDITOR /etc/dotfiles/other/kitty";
+      ne        = "$EDITOR /etc/dotfiles";
+      fu        = "sudo nix flake update /etc/dotfiles/nix";
+      nixup     = "sudo nixos-rebuild switch --flake /etc/dotfiles/nix#desktop";
+      l         = "eza --long --header --git --no-permissions --no-user --all --grid --icons";
+      ll        = "eza --long --no-user --git --all --icons";
+      refresh   = "source /etc/dotfiles/other/.zshrc";
+      findFile  = "find / -type f -iname";
+      lg        = "lazygit";
+      tree      = "tree -C -a -I '.git|.github|.yarn|.DS_Store|node_modules'";
+    };
+
+    history.size = 6000;
+
+    # VTE integration, let terminal track working directory
+    enableVteIntegration = true;
+
+    enableCompletion = true;
+  };
 };}

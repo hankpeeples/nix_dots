@@ -1,15 +1,15 @@
 # this file contains shared config i want to have on desktop (gui) devices
-{ config, pkgs, variables, host, hyprland-34-pkgs, ... }:
+{ config, pkgs, variables, host, hyprland-34-pkgs, vscode-extensions, ... }:
 {
   # self-explaining one-liners
   boot.supportedFilesystems = [ "ntfs" "exfat" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [ variables.secrets.barrier.port ];
-    allowedUDPPorts = [];
-  };
+  # networking.firewall = {
+  #   enable = true;
+  #   allowedTCPPorts = [ variables.secrets.barrier.port ];
+  #   allowedUDPPorts = [];
+  # };
 
   boot.loader = {
     timeout = 1;
@@ -61,7 +61,7 @@
     settings.General = {
       Experimental = "true"; # "enables dbus experimental interfaces"
       FastConnectable = "true"; # connect faster but draw more power
-      Enable = "Control,Gateway,Headset,Media,Sink,Socket,Source"; # idk, from oaj
+      Enable = "Control,Gateway,Headset,Media,Sink,Socket,Source"; # idk
     };
   };
 
@@ -120,6 +120,8 @@
         ln -sf $out/share/icons/Papirus/48x48/apps/firefox-developer-icon.svg $out/share/icons/Papirus/48x48/apps/firefox.svg
         ln -sf $out/share/icons/Papirus/64x64/apps/firefox-developer-icon.svg $out/share/icons/Papirus/64x64/apps/firefox.svg
     ''; }))
+
+    vscode
 
     ### cli
     playerctl # pause media with mpris
@@ -186,7 +188,7 @@
     videoDrivers = [ "nvidia" ];
 
     # window manager / desktop environment
-    windowManager.awesome.enable = true;
+    # windowManager.awesome.enable = true;
 
     # display manager
     displayManager.defaultSession = "hyprland";
@@ -222,12 +224,6 @@
   # shell alias for shorter fastfetch
   environment.shellAliases.fastfetch-short = "fastfetch -c /etc/dotfiles/fastfetch/short.jsonc";
 
-  # make some stuff in alacritty look better...? probably subjective
-  fonts.fontconfig = {
-    subpixel.rgba = "vrgb";
-    hinting.style = "full"; # may cause loss of shape, try lower value?
-  };
-
   # qt theming (based on gtk theming)
   qt = {
     enable = true;
@@ -236,16 +232,16 @@
   };
 
   ### steam (PROPRIETARY)
-  programs.steam = {
-    enable = true;
-    package = pkgs.unstable.steam;
-  };
+  # programs.steam = {
+  #   enable = true;
+  #   package = pkgs.unstable.steam;
+  # };
   # currently needs this
   nixpkgs.config.permittedInsecurePackages = [ "electron-25.9.0" ];
 
   ### hyprland (tiling wayland compositor)
   # make chromium / electron apps use wayland
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  # environment.sessionVariables.NIXOS_OZONE_WL = "1";
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -305,7 +301,7 @@
     enable = true;
     theme = "transparent"; # own theme
     package = pkgs.rofi-wayland; # wayland support
-    terminal = "${pkgs.unstable.alacritty}/bin/alacritty";
+    terminal = "${pkgs.kitty}/bin/kitty";
   };
 
   # flameshot (screenshots on xorg)
@@ -332,20 +328,16 @@
     "eww"                     = { source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/eww";     recursive = true; };
     "awesome"                 = { source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/awesome"; recursive = true; };
     "waybar"                  = { source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/waybar";  recursive = true; };
-    "zellij"                  = { source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/zellij";  recursive = true; };
     "kitty"                   = { source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/kitty";   recursive = true; };
     "swaync"                     .source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/swaync";
     "hypr/hyprland.conf"         .source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/hyprland/hyprland.conf";
     "fastfetch/config.jsonc"     .source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/fastfetch/default.jsonc";   
     "picom.conf"                 .source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/other/picom.conf";
     "copyq/copyq.conf"           .source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/other/copyq.conf";
-    "VSCodium/User/settings.json".source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/other/vscodium.json";
-    "alacritty/alacritty.toml"   .source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/other/alacritty.toml";
   };
   # files somewhere else in ~/
   home.file = {
     ".zshrc".source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/other/.zshrc";
-    ".ideavimrc".source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/other/.ideavimrc";
     ".local/share/rofi/themes".source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/rofi";
     ".mozilla/firefox/${host.firefoxProfile}/chrome/userChrome.css".source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/other/firefox.css";
   };
