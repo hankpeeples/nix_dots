@@ -78,7 +78,9 @@
     aileron # modern text with 16 variations
     # install only specific nerd fonts
     (nerdfonts.override { fonts = [
-      "JetBrainsMono" # good for code
+      "JetBrainsMono"
+      "Monaspice"
+      "ProFont"
     ]; } )
   ];
 
@@ -325,6 +327,7 @@
   # files in ~/.config/
   xdg.configFile = {
     "nvim"                    = { source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/nvim";    recursive = true; };
+    "helix"                   = { source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/helix";   recursive = true; };
     "eww"                     = { source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/eww";     recursive = true; };
     "awesome"                 = { source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/awesome"; recursive = true; };
     "waybar"                  = { source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/waybar";  recursive = true; };
@@ -340,5 +343,6 @@
     ".zshrc".source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/other/.zshrc";
     ".local/share/rofi/themes".source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/rofi";
     ".mozilla/firefox/${host.firefoxProfile}/chrome/userChrome.css".source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/other/firefox.css";
+    ".local/share/fonts".source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/fonts"
   };
 };}

@@ -51,6 +51,8 @@
     wget
     vim
     bash
+    gnupg
+    pinentry
     jq # process json
     lsd # better ls
     eza
@@ -59,10 +61,12 @@
     tldr # summarize man pages
     zoxide # better cd
     fastfetch # neofetch but fast
+    unzip
     git-credential-manager
     gh
     lazygit
     neovim
+    helix
     librespeed-cli # speedtest
     meson ninja # for building c/c++ projects
     pkg-config # for c/c++/rust dependency management
@@ -71,6 +75,7 @@
     gcc
     rustup
     go
+    bun
     nodePackages_latest.nodejs
     (python3.withPackages (python-pkgs: with python-pkgs; [
       virtualenv
