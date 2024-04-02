@@ -1,0 +1,54 @@
+theme = "onedark"
+
+[editor]
+line-number = "relative"
+mouse = true
+middle-click-paste = true
+cursorline = true
+cursorcolumn = true
+gutters = ["diagnostics", "spacer", "line-numbers", "spacer", "diff"]
+true-color = true
+bufferline = "always" # opts: always, never, multiple
+color-modes = true
+
+[editor.statusline] # [ ... ... LEFT ... ... | ... ... ... CENTER ... ... ... | ... ... RIGHT ... ... ]
+left = ["mode", "spacer", "version-control", "spinner"]
+center = ["file-modification-indicator", "file-name"]
+right = ["diagnostics", "selections", "position", "file-encoding", "file-line-ending", "file-type"]
+separator = "│"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+[editor.lsp]
+display-messages = true
+display-inlay-hints = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[editor.whitespace.render]
+space = "none"
+tab = "all"
+nbsp = "none"
+nnbsp = "none"
+newline = "none"
+
+[editor.whitespace.characters]
+space = "·"
+nbsp = "⍽"
+nnbsp = "␣"
+tab = "→"
+newline = "⏎"
+tabpad = "·" # Tabs will look like "→···" (depending on tab width)
+
+[editor.indent-guides]
+render = true
+character = "╎" # Some characters that work well: "▏", "┆", "┊", "⸽"
+skip-levels = 1
+
