@@ -67,6 +67,15 @@
     lazygit
     neovim
     helix
+    docker
+
+    # wails deps
+    gtk3-x11
+    gtk3
+    webkitgtk
+    nsis
+    upx
+
     librespeed-cli # speedtest
     meson ninja # for building c/c++ projects
     pkg-config # for c/c++/rust dependency management
@@ -91,10 +100,15 @@
   # zsh config
   programs.zsh = {
     enable = true;
+    zsh-autoenv.enable = true;
     enableGlobalCompInit = true;
     autosuggestions.enable = true;
     promptInit = ''# nothing'';
     syntaxHighlighting.enable = true;
+
+    shellInit = ''
+      export PKG_CONFIG_PATH=${pkgs.gtk3};
+    '';
   };
 
   ###########################################

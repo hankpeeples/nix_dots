@@ -12,7 +12,7 @@
   # };
 
   boot.loader = {
-    timeout = 1;
+    timeout = 3;
     efi = { 
       canTouchEfiVariables = true;
       efiSysMountPoint = "/boot";
@@ -79,7 +79,6 @@
     # install only specific nerd fonts
     (nerdfonts.override { fonts = [
       "JetBrainsMono"
-      "Monaspice"
       "ProFont"
     ]; } )
   ];
@@ -90,6 +89,7 @@
     firefox-devedition # browser
     unstable.alacritty # terminal
     kitty
+    revive
     bottles # run windows software easily
     protonup-qt # easy ge-proton setup for steam
     variables.pkgs.gitnuro # newer version compared to nixpkgs
@@ -151,8 +151,8 @@
     unclutter-xfixes # hide mouse on inactivity
     pick-colour-picker
     # could/should work on wayland, but doesnt for now :(
-    insomnia # rest api client
-    barrier # kvm switch
+    # insomnia # rest api client
+    # barrier # kvm switch
     gparted # partition manager
 
     ### only used on wayland
@@ -343,6 +343,6 @@
     ".zshrc".source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/other/.zshrc";
     ".local/share/rofi/themes".source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/rofi";
     ".mozilla/firefox/${host.firefoxProfile}/chrome/userChrome.css".source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/other/firefox.css";
-    ".local/share/fonts".source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/fonts"
+    ".local/share/fonts".source = config.lib.file.mkOutOfStoreSymlink "/etc/dotfiles/fonts";
   };
 };}

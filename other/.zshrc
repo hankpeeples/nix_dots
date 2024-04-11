@@ -1,4 +1,4 @@
-export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:/usr/bin:/usr/local/bin:/sbin:$HOME/go/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:/usr/bin:/usr/local/bin:/usr/local/go/bin:/sbin:$HOME/go/bin:$PATH
 
 ZSH_DISABLE_COMPFIX=true
 
@@ -57,8 +57,8 @@ alias hyprconf="$EDITOR $NIX_DIR/hypr"
 
 alias cdn="cd $NIX_DIR"
 alias ne="$EDITOR $NIX_DIR"
-alias fu="sudo nix flake update $NIX_DIR/nix"
-alias nixup="sudo nixos-rebuild switch --flake $NIX_DIR/nix#desktop"
+alias fu="nix flake update $NIX_DIR/nix"
+alias nixup="sudo nixos-rebuild switch --flake $NIX_DIR/nix#desktop --upgrade"
 
 alias l="eza --long --header --git --no-permissions --no-user --all --grid --icons"
 alias ll="eza --long --no-user --git --all --icons"
